@@ -55,6 +55,14 @@ public class Invoice implements Serializable {
 			getItems().add(item);
 		}	
 	}
+	
+	public void removeItem(Item item) {
+		
+		if(getItems().contains(item)){
+			getItems().remove(item);
+		}
+		
+	}
 
 	public long getNumber() {
 		return number;

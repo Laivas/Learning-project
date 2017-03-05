@@ -23,7 +23,7 @@ public class Item implements Serializable {
 	@NotBlank
 	private String title;
 	
-	private String amount;
+	private int amount;
 	
 	private String weight;
 	
@@ -31,6 +31,13 @@ public class Item implements Serializable {
 	
 	private double totalPrice;
 
+	
+	public void totalPrice() {
+		
+		setTotalPrice(amount * price);
+		
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -47,11 +54,11 @@ public class Item implements Serializable {
 		this.title = title;
 	}
 
-	public String getAmount() {
+	public int getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 

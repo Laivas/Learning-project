@@ -5,16 +5,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -26,10 +31,8 @@ import org.hibernate.validator.constraints.NotBlank;
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //@DiscriminatorValue("G") // general
 @Entity
-@Table(indexes = @Index(columnList = ""))
-@DiscriminatorColumn(discriminatorType = DiscriminatorType.CHAR, length = 1, name = "INVOICE_TYPE")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorValue("G")
+@Table(name = "invoice")
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Invoice implements Serializable {
 
 	private static final long serialVersionUID = -765511469134241231L;
@@ -41,10 +44,12 @@ public class Invoice implements Serializable {
 	@NotNull
 	@NotBlank
 	private long number;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 	private String company;
 	private String recipient;
 	
+	@OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	private List<Item> items;
 
 	public void addItem(Item item) {

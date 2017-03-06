@@ -2,9 +2,12 @@ package entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -30,6 +33,10 @@ public class Item implements Serializable {
 	private double price;
 	
 	private double totalPrice;
+	
+	@JoinColumn(name = "invoice_id")
+	@ManyToOne(optional = true, cascade = { CascadeType.ALL})
+	private Invoice invoice;
 
 	
 	public void totalPrice() {
@@ -84,6 +91,14 @@ public class Item implements Serializable {
 
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+	public Invoice getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
 	}
 	
 	

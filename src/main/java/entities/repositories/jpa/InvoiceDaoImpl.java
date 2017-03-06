@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -29,24 +30,63 @@ public class InvoiceDaoImpl implements InvoiceRepository{
 
 	public Invoice findByNumber(Long number) {
 		
-		EntityManager entityManager = getEntityManager();
-
+		EntityManager em = getEntityManager();
+		try { 
+			TypedQuery<Invoice> invoiceQuery = em.createQuery("SELECT i From Invoice i WHERE i.number =:number",
+					Invoice.class);
+			invoiceQuery.setParameter("number", number);
+			invoiceQuery.setMaxResults(1);
+			
+			return invoiceQuery.getSingleResult();
+		} finally {
+			em.close();
+		}
 		
-		return null;
 	}
 
 	public List<Invoice> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+
+		EntityManager em = getEntityManager();
+		try {
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+			CriteriaQuery<Invoice> cq = cb.createQuery(Invoice.class);
+			Root<Invoice> root = cq.from(Invoice.class);
+			cq.select(root);
+			TypedQuery<Invoice> tq = em.createQuery(cq);
+			return tq.getResultList();
+		} finally {
+			em.close();
+		}
+		
 	}
 
 	public void save(Invoice newInvoice) {
-		// TODO Auto-generated method stub
+		
+		EntityManager em = getEntityManager();
+		try {
+			em.getTransaction().begin();
+			if(!em.contains(newInvoice))
+				newInvoice = em.merge(newInvoice);
+			em.persist(newInvoice);
+			em.getTransaction().commit();
+		} finally {
+			em.close();
+		}
 		
 	}
 
 	public void delete(Invoice invoice) {
-		// TODO Auto-generated method stub
+		
+		EntityManager em = getEntityManager();
+		
+		try {
+			em.getTransaction().begin();
+			invoice = em.merge(invoice);
+			em.remove(invoice);
+			em.getTransaction().commit();
+		} finally {
+			em.close();
+		}
 		
 	}
 	

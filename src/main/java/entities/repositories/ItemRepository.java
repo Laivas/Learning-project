@@ -10,11 +10,11 @@ public interface ItemRepository {
 	
 	public void delete(Item item);
 	
-	public void deleteById(Long bookId);
+	public void deleteById(Long itemId);
 	
-	public List<Item> findByTitle(String title);
+	public List<Item> findAll();
 	
-	public int countAllItems();
+	public Long countAllItems();
 	
 	
 	

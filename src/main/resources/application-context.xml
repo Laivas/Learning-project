@@ -7,7 +7,7 @@
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
-		<property name="persistenceUnitName" value="InvoiceDB" />
+		<property name="persistenceUnitName" value="invoiceDB" />
 	</bean>
 
 	<bean id="invoiceRepos" class="entities.repositories.jpa.InvoiceDaoImpl"

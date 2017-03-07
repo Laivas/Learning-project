@@ -51,7 +51,7 @@
 		<logback-access.version>1.2.1</logback-access.version>
 		<logback-classic.version>1.2.1</logback-classic.version>
 		<derby.version>10.13.1.1</derby.version>
-		<hibernate-entitymanager.version>5.2.8.Final</hibernate-entitymanager.version>
+		<hibernate-entitymanager.version>5.0.5.Final</hibernate-entitymanager.version>   <!-- 5.2.8.Final not working !!! -->
 		<spring-data-jpa.version>1.11.1.RELEASE</spring-data-jpa.version>
 		<jta.version>1.1</jta.version>
 		<hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>

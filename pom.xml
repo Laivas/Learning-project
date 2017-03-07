@@ -51,7 +51,7 @@
 		<logback-access.version>1.2.1</logback-access.version>
 		<logback-classic.version>1.2.1</logback-classic.version>
 		<derby.version>10.13.1.1</derby.version>
-		<hibernate-core.version>5.2.8.Final</hibernate-core.version>
+		<hibernate-entitymanager.version>5.2.8.Final</hibernate-entitymanager.version>
 		<spring-data-jpa.version>1.11.1.RELEASE</spring-data-jpa.version>
 		<jta.version>1.1</jta.version>
 		<hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
@@ -62,12 +62,6 @@
 	</properties>
 
 	<dependencies>
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.0.5.Final</version>
-		</dependency>
 
 		<!-- junit -->
 		<dependency>
@@ -170,11 +164,11 @@
 			<version>${derby.version}</version>
 		</dependency>
 
-		<!-- hibernate-core -->
+		<!-- hibernate-entitymanager -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate-core.version}</version>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate-entitymanager.version}</version>
 		</dependency>
 
 		<!-- spring-data-jpa -->

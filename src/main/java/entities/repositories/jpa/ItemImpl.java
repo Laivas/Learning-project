@@ -14,16 +14,19 @@ import entities.repositories.ItemRepository;
 
 public class ItemImpl implements ItemRepository {
 
-	private EntityManagerFactory emf;
+	private EntityManagerFactory entityManagerFactory;
 	
-	public EntityManagerFactory getEmf() {
-		return emf;
+
+	
+	
+	public EntityManagerFactory getEntityManagerFactory() {
+		return entityManagerFactory;
 	}
-	
-	public void setEmf(EntityManagerFactory emf) {
-		this.emf=emf;
+
+	public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
+		this.entityManagerFactory = entityManagerFactory;
 	}
-	
+
 	public void insertOrUpdate(Item item) {
 		EntityManager em = getEntityManager();
 		try {
@@ -102,7 +105,7 @@ public class ItemImpl implements ItemRepository {
 	}
 	
 	private EntityManager getEntityManager() {
-		return emf.createEntityManager();
+		return entityManagerFactory.createEntityManager();
 	}
 
 }

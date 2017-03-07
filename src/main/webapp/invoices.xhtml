@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="sablonas.xhtml">
+
+	<ui:define name="turinys">
+		<h:form>
+
+			<p:messages id="messages" showDetail="false" autoUpdate="true"
+				closable="true" />
+
+			<p:dataTable value="#{invoicesPageBean.invoiceList}" var="author">
+				<p:column headerText="Id">
+					<h:outputText value="#{invoice.id}" />
+				</p:column>
+
+				<p:column headerText="Number">
+					<h:outputText value="#{invoice.number}" />
+				</p:column>
+
+				<p:column headerText="Date">
+					<h:outputText value="#{invoice.date}" />
+				</p:column>
+
+				<p:column headerText="Items">
+					<h:dataTable value="#{invoice.items}" var="item" border="0">
+						<h:column>
+		  						#{item.title}
+	  					</h:column>
+					</h:dataTable>
+				</p:column>
+
+				<p:column headerText="">
+					<h:commandButton value="Delete"
+						action="#{invoicesPageBean.deleteSelected(invoice)}" />
+					<h:commandButton value="Add Book"
+						action="#{invoicesPageBean.showAddItemPage(invoice)}" />
+				</p:column>
+			</p:dataTable>
+
+
+		</h:form>
+		<h:form>
+			<p:panel id="basic" header="Invoice" style="margin-bottom:20px">
+				<h:panelGrid id="grid" columns="3" cellpadding="5">
+					<h:outputLabel for="invoice_number" value="Invoice number"></h:outputLabel>
+					<h:inputText id="invoice_number"
+						value="#{invoicesPageData.newInvoice.number}">
+						<f:validateBean />
+					</h:inputText>
+					<p:message for="invoice_number" />
+
+					<h:outputLabel for="invoice_date" value="Invoice date"></h:outputLabel>
+					<h:inputText id="invoice_date"
+						value="#{invoicesPageData.newInvoice.date}"></h:inputText>
+					<p:message for="invoice_date"/>
+				</h:panelGrid>
+
+			</p:panel>
+
+			<h:commandButton action="#{invoicesPageBean.addNew}" value="Add new"
+				update="grid"></h:commandButton>
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="pavadinimas">
+ 	 	Add new item
+ 	 </ui:define>
+
+</ui:composition>

@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="sablonas.xhtml">
+
+	<ui:define name="turinys">
+		<h:form>
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<p:panel id="basic" header="Item details" style="margin-bottom:20px">
+				<h:panelGrid id="grid" columns="3" cellpadding="5">
+					<h:outputLabel for="itemTitle" value="Item title"></h:outputLabel>
+					<h:inputText id="itemTitle" value="#{itemsPageB.newItem.title}">
+						<f:validateBean />
+					</h:inputText>
+					<p:message for="itemTitle" />
+					<h:outputLabel for="amount" value="#{itemsPageB.newItem.amount}"></h:outputLabel>
+
+					<h:inputText id="amount" value="#{itemsPageB.newItem.amount}">
+
+					</h:inputText>
+					<p:message for="amount" />
+				</h:panelGrid>
+
+				<h:commandButton action="#{itemsPageB.addNew}" value="Add new"></h:commandButton>
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="pavadinimas">
+ 	 	Add new item
+ 	 </ui:define>
+
+</ui:composition>

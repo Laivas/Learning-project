@@ -15,7 +15,7 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
-	<bean id="itemRepo" class="entities.repositories.jpa.BookRepositoryJPA"
+	<bean id="itemRepo" class="entities.repositories.jpa.ItemImpl"
 		scope="singleton">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>

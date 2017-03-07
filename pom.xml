@@ -63,6 +63,12 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>3.3.2.GA</version>
+		</dependency>
+
 		<!-- junit -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -209,7 +215,7 @@
 
 	</dependencies>
 	<repositories>
-			<repository>
+		<repository>
 			<id>java.net-maven2-SNAPSHOT-repository</id>
 			<name>Java.net SNAPSHOT-Repository for Maven</name>
 			<url>https://maven.java.net/content/repositories/snapshots/</url>

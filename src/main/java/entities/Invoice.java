@@ -42,7 +42,6 @@ public class Invoice implements Serializable {
 	private long id;
 	
 	@NotNull
-	@NotBlank
 	private long number;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;

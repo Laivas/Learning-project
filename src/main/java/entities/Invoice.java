@@ -61,15 +61,13 @@ public class Invoice implements Serializable {
 		
 	}
 	
-	public long getId() {
-		return id;
+	public double getTotalPrice() {
+		double price = 0;
+		 for(Item i : this.items) {
+			 price+=i.getTotalPrice();
+		 }
+		 return price;
 	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	
 	
 	public long getId() {
 		return id;

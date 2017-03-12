@@ -12,6 +12,9 @@
 				closable="true" />
 
 			<p:dataTable value="#{itemsPageB.itemList}" var="item">
+				<f:facet name="header">
+					<h:outputText value="Invoice number : #{invoicesPageBean.data.currentInvoice.number}"/>
+				</f:facet>
 
 				<p:column headerText="Title">
 					<h:outputText value="#{item.title}" />

@@ -11,8 +11,11 @@
 			<p:messages id="messages" showDetail="false" autoUpdate="true"
 				closable="true" />
 
-			<p:dataTable value="#{itemsPageB.itemList}" var="item">
-
+			<p:dataTable value="#{itemsPageB.itemList}" var="item" rowkey="item.id">
+				<f:facet name="header">
+					<h:outputText
+						value="Invoice number : #{invoicesPageBean.data.currentInvoice.number}" />
+				</f:facet>
 				<p:column headerText="Title">
 					<h:outputText value="#{item.title}" />
 				</p:column>
@@ -31,6 +34,12 @@
 
 				<p:column headerText="Total price">
 					<h:outputText value="#{item.totalPrice}" />
+				</p:column>
+
+				<p:column>
+					<h:commandButton value="Delete"
+						action="#{itemsPageB.deleteSelected(item)}" />
+					 <h:commandButton value="Edit" action="#{itemsPageB.addNew}" />  
 				</p:column>
 
 

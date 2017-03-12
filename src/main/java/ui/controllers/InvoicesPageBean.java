@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import entities.Invoice;
 import entities.repositories.InvoiceRepository;
+import ui.controllers.InvoicesPageBean.InvoicesPageData;
 
 
 public class InvoicesPageBean {
@@ -61,6 +62,7 @@ public class InvoicesPageBean {
 		public void setFoundInvoices(List<Invoice> foundInvoices) {
 			this.foundInvoices = foundInvoices;
 		}
+
 		
 	}
 	

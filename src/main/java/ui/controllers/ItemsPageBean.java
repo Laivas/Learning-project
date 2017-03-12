@@ -1,13 +1,16 @@
 package ui.controllers;
 
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import entities.Invoice;
 import entities.Item;
 import entities.repositories.InvoiceRepository;
 import entities.repositories.ItemRepository;
+
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class ItemsPageBean {
 
@@ -16,7 +19,7 @@ public class ItemsPageBean {
 	private InvoiceRepository invoiceRepo;
 	private ItemRepository itemRepo;
 	
-	private InvoicesPageBean invoicePageBean;
+	private InvoicesPageBean invoicesPageBean;
 	
 	private Item newItem;
 	
@@ -26,7 +29,7 @@ public class ItemsPageBean {
 	
 	public String addNew() {
 		
-		Invoice invoice = invoicePageBean.getData().getCurrentInvoice();
+		Invoice invoice = invoicesPageBean.getData().getCurrentInvoice();
 		log.info("Adding new item to invoice : {}", invoice);
 		log.info("New item info: {}", newItem);
 		newItem.setInvoice(invoice);
@@ -34,6 +37,11 @@ public class ItemsPageBean {
 		invoiceRepo.save(invoice);
 		
 		return InvoicesPageBean.NAV_LIST_INVOICES;
+	}
+	
+	public String deleteSelected(Item item) {
+			itemRepo.delete(item);		
+		return InvoicesPageBean.NAV_SHOW_ADD_ITEM;
 	}
 
 	public InvoiceRepository getInvoiceRepo() {
@@ -53,11 +61,11 @@ public class ItemsPageBean {
 	}
 
 	public InvoicesPageBean getInvoicePageBean() {
-		return invoicePageBean;
+		return invoicesPageBean;
 	}
 
 	public void setInvoicePageBean(InvoicesPageBean invoicePageBean) {
-		this.invoicePageBean = invoicePageBean;
+		this.invoicesPageBean = invoicePageBean;
 	}
 
 	public Item getNewItem() {
@@ -68,6 +76,8 @@ public class ItemsPageBean {
 		this.newItem = newItem;
 	}
 	
-	
+	public List<Item> getItemList() {
+		return invoicesPageBean.getData().getCurrentInvoice().getItems();
+	}
 	
 }

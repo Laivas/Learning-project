@@ -5,6 +5,41 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" template="sablonas.xhtml">
 
 	<ui:define name="turinys">
+
+
+		<h:form>
+			<p:messages id="messages" showDetail="false" autoUpdate="true"
+				closable="true" />
+
+			<p:dataTable value="#{itemsPageB.itemList}" var="item">
+
+				<p:column headerText="Title">
+					<h:outputText value="#{item.title}" />
+				</p:column>
+
+				<p:column headerText="Amount">
+					<h:outputText value="#{item.amount}" />
+				</p:column>
+
+				<p:column headerText="Weight">
+					<h:outputText value="#{item.weight}" />
+				</p:column>
+
+				<p:column headerText="Unit Price">
+					<h:outputText value="#{item.price}" />
+				</p:column>
+
+				<p:column headerText="Total price">
+					<h:outputText value="#{item.totalPrice}" />
+				</p:column>
+
+
+
+			</p:dataTable>
+
+		</h:form>
+
+
 		<h:form>
 			<p:messages id="messages" showDetail="true" autoUpdate="true"
 				closable="true" />
@@ -15,17 +50,27 @@
 						<f:validateBean />
 					</h:inputText>
 					<p:message for="itemTitle" />
-					<h:outputLabel for="amount" value="#{itemsPageB.newItem.amount}"></h:outputLabel>
 
+					<h:outputLabel for="amount" value="Amount"></h:outputLabel>
 					<h:inputText id="amount" value="#{itemsPageB.newItem.amount}">
-
 					</h:inputText>
 					<p:message for="amount" />
+
+					<h:outputLabel for="weight" value="Weight"></h:outputLabel>
+					<h:inputText id="weight" value="#{itemsPageB.newItem.weight}">
+					</h:inputText>
+					<p:message for="weight" />
+
+					<h:outputLabel for="price" value="Price"></h:outputLabel>
+					<h:inputText id="price" value="#{itemsPageB.newItem.price}">
+					</h:inputText>
+					<p:message for="price" />
 				</h:panelGrid>
 
 				<h:commandButton action="#{itemsPageB.addNew}" value="Add new"></h:commandButton>
 			</p:panel>
 		</h:form>
+
 
 	</ui:define>
 

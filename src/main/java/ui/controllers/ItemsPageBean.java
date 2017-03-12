@@ -39,9 +39,9 @@ public class ItemsPageBean {
 		return InvoicesPageBean.NAV_LIST_INVOICES;
 	}
 	
-	public String deleteSelected(Item item) {
-			itemRepo.delete(item);		
-		return InvoicesPageBean.NAV_SHOW_ADD_ITEM;
+	public void deleteSelected(Item item) {
+		itemRepo.deleteById(item.getId());
+		invoicesPageBean.getData().getCurrentInvoice().removeItem(item);
 	}
 
 	public InvoiceRepository getInvoiceRepo() {

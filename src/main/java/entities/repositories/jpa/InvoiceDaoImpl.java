@@ -69,6 +69,7 @@ public class InvoiceDaoImpl implements InvoiceRepository{
 				newInvoice = em.merge(newInvoice);
 			em.persist(newInvoice);
 			em.getTransaction().commit();
+			log.info("save new invoice");
 		} finally {
 			em.close();
 		}

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import entities.Invoice;
 import entities.repositories.InvoiceRepository;
+import ui.controllers.InvoicesPageBean.InvoicesPageData;
 
 
 public class InvoicesPageBean {
@@ -19,6 +20,7 @@ public class InvoicesPageBean {
 	static final Logger log = LoggerFactory.getLogger(InvoicesPageBean.class);
 	
 	public static final String NAV_SHOW_ADD_ITEM = "show-add-item";
+	public static final String NAV_SHOW_VIEW = "show-view-page";
 	public static final String NAV_LIST_INVOICES = "list-invoices";
 	
 	public static class InvoicesPageData implements Serializable {
@@ -61,6 +63,7 @@ public class InvoicesPageBean {
 		public void setFoundInvoices(List<Invoice> foundInvoices) {
 			this.foundInvoices = foundInvoices;
 		}
+
 		
 	}
 	
@@ -87,6 +90,11 @@ public class InvoicesPageBean {
 		log.info("Intention to add new item to invoice nr: "+invoice.getNumber());
 		data.currentInvoice = invoice;
 		return NAV_SHOW_ADD_ITEM;
+	}
+	
+	public String showViewPage(Invoice invoice) {
+		data.currentInvoice = invoice;
+		return NAV_SHOW_VIEW;
 	}
 
 	public InvoicesPageData getData() {

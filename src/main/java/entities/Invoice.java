@@ -60,8 +60,14 @@ public class Invoice implements Serializable {
 		}
 		
 	}
-
 	
+	public double getTotalPrice() {
+		double price = 0;
+		 for(Item i : this.items) {
+			 price+=i.getTotalPrice();
+		 }
+		 return price;
+	}
 	
 	public long getId() {
 		return id;

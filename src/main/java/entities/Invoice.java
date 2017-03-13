@@ -16,6 +16,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.action.internal.OrphanRemovalAction;
+import org.hibernate.annotations.Cascade;
+
 
 
 
@@ -41,7 +44,8 @@ public class Invoice implements Serializable {
 	private String company;
 	private String recipient;
 	
-	@OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	
+	@OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true)
 	private List<Item> items;
 
 	public void addItem(Item item) {
@@ -50,6 +54,7 @@ public class Invoice implements Serializable {
 			setItems(new ArrayList<Item>());
 		}if(!getItems().contains(item)){
 			getItems().add(item);
+			item.setInvoice(this);
 		}	
 	}
 	
@@ -57,6 +62,7 @@ public class Invoice implements Serializable {
 		
 		if(getItems().contains(item)){
 			getItems().remove(item);
+			item.setInvoice(null);
 		}
 		
 	}

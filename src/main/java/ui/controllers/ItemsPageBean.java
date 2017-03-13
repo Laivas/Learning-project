@@ -24,7 +24,15 @@ public class ItemsPageBean {
 	private Item newItem;
 	
 	public void init() {
+		
 		newItem = new Item();
+		
+	}
+	
+	public void updateItem() {
+		
+		
+		
 	}
 	
 	public String addNew() {
@@ -40,8 +48,13 @@ public class ItemsPageBean {
 	}
 	
 	public void deleteSelected(Item item) {
-		itemRepo.deleteById(item.getId());
-		invoicesPageBean.getData().getCurrentInvoice().removeItem(item);
+
+		Invoice i = item.getInvoice();
+		i.removeItem(item);
+		Long id = item.getId();
+		itemRepo.deleteById(id);
+
+		
 	}
 
 	public InvoiceRepository getInvoiceRepo() {

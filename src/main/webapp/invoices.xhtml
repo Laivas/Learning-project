@@ -33,17 +33,20 @@
 				</p:column>
 
 				<p:column headerText="Items">
-					<h:dataTable value="#{invoice.items}" var="item" border="0">
+					<!--  <h:dataTable value="#{invoice.items}" var="item" border="0">
 						<h:column>
 		  						#{item.title}
 	  					</h:column>
-					</h:dataTable>
+					</h:dataTable>  -->
+					<h:commandButton value="Update"
+						action="#{invoicesPageBean.invoiceToUpdate(invoice)}" />
 				</p:column>
 
 				<p:column headerText="Options">
 					<h:commandButton value="Delete"
 						action="#{invoicesPageBean.deleteSelected(invoice)}" />
-					<h:commandButton value="View" action="#{invoicesPageBean.showViewPage(invoice)}" />
+					<h:commandButton value="View"
+						action="#{invoicesPageBean.showViewPage(invoice)}" />
 					<h:commandButton value="Add Item"
 						action="#{invoicesPageBean.showAddItemPage(invoice)}" />
 				</p:column>
@@ -81,11 +84,11 @@
 					</h:inputText>
 					<p:message for="recipient" />
 				</h:panelGrid>
-
+				<h:commandButton action="#{invoicesPageBean.addNew}" value="Add new"
+					update="grid"></h:commandButton>
 			</p:panel>
 
-			<h:commandButton action="#{invoicesPageBean.addNew}" value="Add new"
-				update="grid"></h:commandButton>
+
 		</h:form>
 
 	</ui:define>

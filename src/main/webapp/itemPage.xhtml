@@ -11,7 +11,8 @@
 			<p:messages id="messages" showDetail="false" autoUpdate="true"
 				closable="true" />
 
-			<p:dataTable value="#{itemsPageB.itemList}" var="item" rowkey="item.id">
+			<p:dataTable value="#{itemsPageB.itemList}" var="item"
+				rowkey="item.id">
 				<f:facet name="header">
 					<h:outputText
 						value="Invoice number : #{invoicesPageBean.data.currentInvoice.number}" />
@@ -39,7 +40,6 @@
 				<p:column>
 					<h:commandButton value="Delete"
 						action="#{itemsPageB.deleteSelected(item)}" />
-					 <h:commandButton value="Edit" action="#{itemsPageB.addNew}" />  
 				</p:column>
 
 

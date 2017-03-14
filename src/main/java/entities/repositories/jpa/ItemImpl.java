@@ -54,6 +54,7 @@ public class ItemImpl implements ItemRepository {
 		EntityManager em = getEntityManager();
 		try {
 			em.getTransaction().begin();
+			item.setInvoice(null);
 			em.remove(item);
 			em.getTransaction().commit();
 		} finally {
@@ -68,6 +69,7 @@ public class ItemImpl implements ItemRepository {
 			em.getTransaction().begin();
 			Item item = em.find(Item.class, itemId);
 			if(item != null)
+				item.setInvoice(null);
 				em.remove(item);
 			em.getTransaction().commit();
 		} finally {
@@ -107,5 +109,6 @@ public class ItemImpl implements ItemRepository {
 	private EntityManager getEntityManager() {
 		return entityManagerFactory.createEntityManager();
 	}
+
 
 }

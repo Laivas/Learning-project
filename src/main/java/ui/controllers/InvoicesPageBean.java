@@ -86,6 +86,12 @@ public class InvoicesPageBean {
 		return NAV_LIST_INVOICES;
 	}
 	
+	public void invoiceToUpdate(Invoice invoice) {
+		
+		data.newInvoice = invoiceRepo.update(invoice);
+		
+	}
+	
 	public String showAddItemPage(Invoice invoice) {
 		log.info("Intention to add new item to invoice nr: "+invoice.getNumber());
 		data.currentInvoice = invoice;
@@ -118,29 +124,5 @@ public class InvoicesPageBean {
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

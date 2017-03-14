@@ -15,33 +15,40 @@ import org.slf4j.LoggerFactory;
 import entities.Invoice;
 import entities.repositories.InvoiceRepository;
 
-
-public class InvoiceDaoImpl implements InvoiceRepository{
+public class InvoiceDaoImpl implements InvoiceRepository {
 
 	static final Logger log = LoggerFactory.getLogger(InvoiceDaoImpl.class);
-	
+
 	private EntityManagerFactory entityManagerFactory;
 
-	
-	
 	public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
 		this.entityManagerFactory = entityManagerFactory;
 	}
 
 	public Invoice findByNumber(Long number) {
-		
+
 		EntityManager em = getEntityManager();
-		try { 
+		try {
 			TypedQuery<Invoice> invoiceQuery = em.createQuery("SELECT i From Invoice i WHERE i.number =:number",
 					Invoice.class);
 			invoiceQuery.setParameter("number", number);
 			invoiceQuery.setMaxResults(1);
-			
+
 			return invoiceQuery.getSingleResult();
 		} finally {
 			em.close();
 		}
-		
+
+	}
+
+	@Override
+	public Invoice update(Invoice invoice) {
+		EntityManager em = getEntityManager();
+		try {
+			return em.merge(invoice);
+		} finally {
+			em.close();
+		}
 	}
 
 	public List<Invoice> findAll() {
@@ -57,15 +64,15 @@ public class InvoiceDaoImpl implements InvoiceRepository{
 		} finally {
 			em.close();
 		}
-		
+
 	}
 
 	public void save(Invoice newInvoice) {
-		
+
 		EntityManager em = getEntityManager();
 		try {
 			em.getTransaction().begin();
-			if(!em.contains(newInvoice))
+			if (!em.contains(newInvoice))
 				newInvoice = em.merge(newInvoice);
 			em.persist(newInvoice);
 			em.getTransaction().commit();
@@ -73,13 +80,13 @@ public class InvoiceDaoImpl implements InvoiceRepository{
 		} finally {
 			em.close();
 		}
-		
+
 	}
 
 	public void delete(Invoice invoice) {
-		
+
 		EntityManager em = getEntityManager();
-		
+
 		try {
 			em.getTransaction().begin();
 			invoice = em.merge(invoice);
@@ -88,12 +95,27 @@ public class InvoiceDaoImpl implements InvoiceRepository{
 		} finally {
 			em.close();
 		}
-		
+
 	}
-	
-	private EntityManager getEntityManager(){
-		
+
+	private EntityManager getEntityManager() {
+
 		return entityManagerFactory.createEntityManager();
+	}
+
+	@Override
+	public Invoice findById(Long id) {
+
+		EntityManager em = getEntityManager();
+		try {
+			TypedQuery<Invoice> invoiceQuery = em.createQuery("SELECT i From Invoice i WHERE i.id =:id", Invoice.class);
+			invoiceQuery.setParameter("id", id);
+			invoiceQuery.setMaxResults(1);
+
+			return invoiceQuery.getSingleResult();
+		} finally {
+			em.close();
+		}
 	}
 
 }

@@ -10,6 +10,7 @@
 		<property name="persistenceUnitName" value="invoiceDB" />
 	</bean>
 
+
 	<bean id="invoiceRepos" class="entities.repositories.jpa.InvoiceDaoImpl"
 		scope="singleton">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
@@ -30,6 +31,9 @@
 	</bean>
 
 	<bean id="newItem" class="entities.Item" scope="session"></bean>
+	
+
+	
 
 	<bean id="itemsPageB" class="ui.controllers.ItemsPageBean"
 		scope="request" init-method="init" lazy-init="false">

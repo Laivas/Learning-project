@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.primefaces.model.chart.BarChartModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +23,7 @@ public class InvoicesPageBean {
 	public static final String NAV_SHOW_ADD_ITEM = "show-add-item";
 	public static final String NAV_SHOW_VIEW = "show-view-page";
 	public static final String NAV_LIST_INVOICES = "list-invoices";
+	public static final String NAV_ADD_NEW_INVOICE = "add-invoice";
 	
 	public static class InvoicesPageData implements Serializable {
 
@@ -67,6 +69,9 @@ public class InvoicesPageBean {
 		
 	}
 	
+	@Inject
+	private ChartView cw;
+	
 	private InvoicesPageData data;
 	
 	private InvoiceRepository invoiceRepo;
@@ -79,6 +84,17 @@ public class InvoicesPageBean {
 		return NAV_LIST_INVOICES;
 	}
 	
+	public BarChartModel chart(Invoice invoice){
+		
+		cw = new ChartView();
+		cw.setList(invoice.getItems());
+		cw.init();
+		
+		
+		return cw.getBarModel();
+		
+	}
+	
 	public String deleteSelected(Invoice invoice) {
 		log.info("Deleting invoice: "+invoice.getNumber());
 			invoiceRepo.delete(invoice);
@@ -86,9 +102,10 @@ public class InvoicesPageBean {
 		return NAV_LIST_INVOICES;
 	}
 	
-	public void invoiceToUpdate(Invoice invoice) {
+	public String invoiceToUpdate(Invoice invoice) {
 		
 		data.newInvoice = invoiceRepo.update(invoice);
+		return NAV_ADD_NEW_INVOICE;
 		
 	}
 	
@@ -119,6 +136,16 @@ public class InvoicesPageBean {
 		this.invoiceRepo = invoiceRepo;
 	}
 	
+	
+	
+	public ChartView getCw() {
+		return cw;
+	}
+
+	public void setCw(ChartView cw) {
+		this.cw = cw;
+	}
+
 	public List<Invoice> getInvoiceList() {
 		return invoiceRepo.findAll();
 	}

@@ -8,6 +8,7 @@ import entities.repositories.ItemRepository;
 
 import java.util.List;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +20,8 @@ public class ItemsPageBean {
 	private InvoiceRepository invoiceRepo;
 	private ItemRepository itemRepo;
 	
+
+	 
 	private InvoicesPageBean invoicesPageBean;
 	
 	private Item newItem;
@@ -29,22 +32,29 @@ public class ItemsPageBean {
 		
 	}
 	
-	public void updateItem() {
+
+	
+	public void updateItem(Item item) {
 		
-		
+		newItem = itemRepo.update(item);
 		
 	}
+	
 	
 	public String addNew() {
 		
 		Invoice invoice = invoicesPageBean.getData().getCurrentInvoice();
 		log.info("Adding new item to invoice : {}", invoice);
 		log.info("New item info: {}", newItem);
+		if(invoice.getItems().contains(newItem)) {
+			itemRepo.insertOrUpdate(newItem);
+		}
+		else
 		newItem.setInvoice(invoice);
 		invoice.addItem(newItem);
 		invoiceRepo.save(invoice);
 		
-		return InvoicesPageBean.NAV_LIST_INVOICES;
+		return InvoicesPageBean.NAV_SHOW_ADD_ITEM;
 	}
 	
 	public void deleteSelected(Item item) {
@@ -55,6 +65,14 @@ public class ItemsPageBean {
 		itemRepo.deleteById(id);
 
 		
+	}
+
+	public InvoicesPageBean getInvoicesPageBean() {
+		return invoicesPageBean;
+	}
+
+	public void setInvoicesPageBean(InvoicesPageBean invoicesPageBean) {
+		this.invoicesPageBean = invoicesPageBean;
 	}
 
 	public InvoiceRepository getInvoiceRepo() {
@@ -92,5 +110,7 @@ public class ItemsPageBean {
 	public List<Item> getItemList() {
 		return invoicesPageBean.getData().getCurrentInvoice().getItems();
 	}
+	
+	
 	
 }

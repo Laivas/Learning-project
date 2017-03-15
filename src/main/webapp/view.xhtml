@@ -6,6 +6,47 @@
 
 	<ui:define name="turinys">
 
+
+		<h:form>
+			<p:outputPanel>
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputText value="Invoice number:" />
+					<h:outputText
+						value="#{invoicesPageBean.data.currentInvoice.number}"
+						style="font-weight: bold" />
+
+
+					<h:outputText value="Date:" />
+					<h:outputText value="#{invoicesPageBean.data.currentInvoice.date}"
+						style="font-weight: bold">
+						<f:convertDateTime pattern="MM/dd/yyyy hh:mm a" />
+					</h:outputText>
+
+					<h:outputText value="Company:" />
+					<h:outputText
+						value="#{invoicesPageBean.data.currentInvoice.company}"
+						style="font-weight: bold" />
+
+					<h:outputText value="Recipient:" />
+					<h:outputText
+						value="#{invoicesPageBean.data.currentInvoice.recipient}"
+						style="font-weight: bold" />
+
+					<h:outputText value="Total price:" />
+					<h:outputText
+						value="#{invoicesPageBean.data.currentInvoice.totalPrice}"
+						style="font-weight: bold">
+						<f:convertNumber type="number" pattern="###,###.###€" />
+					</h:outputText>
+
+
+					<h:commandButton value="Add Item"
+						action="#{invoicesPageBean.showAddItemPage(invoicesPageBean.data.currentInvoice)}" />
+				</h:panelGrid>
+			</p:outputPanel>
+		</h:form>
+
+
 		<h:form>
 
 			<p:messages id="messages" showDetail="false" autoUpdate="true"
@@ -13,7 +54,7 @@
 
 			<p:dataTable value="#{itemsPageB.itemList}" var="item">
 				<f:facet name="header">
-					<h:outputText value="Invoice number : #{invoicesPageBean.data.currentInvoice.number}"/>
+					<h:outputText value="List of items" />
 				</f:facet>
 
 				<p:column headerText="Title">
@@ -28,17 +69,25 @@
 					<h:outputText value="#{item.weight}" />
 				</p:column>
 
-				<p:column headerText="Price">
-					<h:outputText value="#{item.price}" />
+				<p:column headerText="Unit price">
+					<h:outputText value="#{item.price}">
+						<f:convertNumber type="number" pattern="###,###.###€" />
+					</h:outputText>
 				</p:column>
 
 				<p:column headerText="Total price">
-					<h:outputText value="#{item.totalPrice}" />
+					<h:outputText value="#{item.totalPrice}">
+						<f:convertNumber type="number" pattern="###,###.###€" />
+					</h:outputText>
 				</p:column>
 
 
 			</p:dataTable>
 
+			<p:panel>
+				<p:chart type="bar" model="#{invoicesPageBean.chart(invoicesPageBean.data.currentInvoice)}"
+					style="height:300px" />
+			</p:panel>
 
 
 		</h:form>

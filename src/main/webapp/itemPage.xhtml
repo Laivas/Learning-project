@@ -30,14 +30,20 @@
 				</p:column>
 
 				<p:column headerText="Unit Price">
-					<h:outputText value="#{item.price}" />
+					<h:outputText value="#{item.price}" >
+					<f:convertNumber type="number" pattern="###,###.###€"/>
+					</h:outputText>
 				</p:column>
 
 				<p:column headerText="Total price">
-					<h:outputText value="#{item.totalPrice}" />
+					<h:outputText value="#{item.totalPrice}" >
+					<f:convertNumber type="number" pattern="###,###.###€"/>
+					</h:outputText>
 				</p:column>
 
 				<p:column>
+					<h:commandButton value="Update"
+						action="#{itemsPageB.updateItem(item)}" />
 					<h:commandButton value="Delete"
 						action="#{itemsPageB.deleteSelected(item)}" />
 				</p:column>
@@ -47,6 +53,8 @@
 			</p:dataTable>
 
 		</h:form>
+
+ 
 
 
 		<h:form>

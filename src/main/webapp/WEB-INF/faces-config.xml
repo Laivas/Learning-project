@@ -30,13 +30,21 @@ com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 
 	<navigation-rule>
 		<navigation-case>
+			<from-outcome>add-invoice</from-outcome>
+			<to-view-id>/addNewInvoice.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<navigation-case>
 			<from-outcome>list-invoices</from-outcome>
 			<to-view-id>/invoices.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
-	
-	
+
+
 	<navigation-rule>
 		<navigation-case>
 			<from-outcome>show-view-page</from-outcome>
@@ -44,8 +52,8 @@ com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
-	
-		<navigation-rule>
+
+	<navigation-rule>
 		<from-view-id>/itemPage.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>list-invoices</from-outcome>
@@ -54,4 +62,22 @@ com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule>
+		<from-view-id>/view.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>show-add-item</from-outcome>
+			<to-view-id>/itemPage.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/itemPage.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>show-add-item</from-outcome>
+			<to-view-id>/itemPage.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
 </faces-config>

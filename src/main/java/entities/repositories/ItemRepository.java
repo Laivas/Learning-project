@@ -16,6 +16,6 @@ public interface ItemRepository {
 	
 	public Long countAllItems();
 	
-	
+	public Item update(Item item);
 	
 }

@@ -17,7 +17,9 @@
 				</p:column>
 
 				<p:column headerText="Date">
-					<h:outputText value="#{invoice.date}" />
+					<h:outputText value="#{invoice.date}">
+						<f:convertDateTime pattern="yyyy-MM-dd" />
+					</h:outputText>
 				</p:column>
 
 				<p:column headerText="Company">
@@ -28,73 +30,30 @@
 					<h:outputText value="#{invoice.recipient}" />
 				</p:column>
 
-				<p:column headerText="Total price">
-					<h:outputText value="#{invoice.totalPrice}" />
-				</p:column>
-
-				<p:column headerText="Items">
-					<!--  <h:dataTable value="#{invoice.items}" var="item" border="0">
-						<h:column>
-		  						#{item.title}
-	  					</h:column>
-					</h:dataTable>  -->
-					<h:commandButton value="Update"
-						action="#{invoicesPageBean.invoiceToUpdate(invoice)}" />
-				</p:column>
-
-				<p:column headerText="Options">
-					<h:commandButton value="Delete"
-						action="#{invoicesPageBean.deleteSelected(invoice)}" />
+				<p:column headerText="View">
 					<h:commandButton value="View"
 						action="#{invoicesPageBean.showViewPage(invoice)}" />
-					<h:commandButton value="Add Item"
-						action="#{invoicesPageBean.showAddItemPage(invoice)}" />
+	
+					<h:commandButton value="Update"
+						action="#{invoicesPageBean.invoiceToUpdate(invoice)}" />
+
+
+				</p:column>
+
+				<p:column headerText="Delete">
+					<h:commandButton value="Delete"
+						action="#{invoicesPageBean.deleteSelected(invoice)}" />
 				</p:column>
 			</p:dataTable>
+			
 
-
-		</h:form>
-		<h:form>
-			<p:panel id="basic" header="Invoice" style="margin-bottom:20px">
-				<h:panelGrid id="grid" columns="3" cellpadding="5">
-					<h:outputLabel for="invoice_number" value="Invoice number"></h:outputLabel>
-					<h:inputText id="invoice_number"
-						value="#{invoicesPageData.newInvoice.number}">
-						<f:validateBean />
-					</h:inputText>
-					<p:message for="invoice_number" />
-
-					<h:outputLabel for="invoice_date" value="Invoice date"></h:outputLabel>
-					<h:inputText id="invoice_date"
-						value="#{invoicesPageData.newInvoice.date}">
-						<f:convertDateTime pattern="yyyy-MM-dd" />
-					</h:inputText>
-					<p:message for="invoice_date" />
-
-
-					<h:outputLabel for="company" value="Company"></h:outputLabel>
-					<h:inputText id="company"
-						value="#{invoicesPageData.newInvoice.company}">
-					</h:inputText>
-					<p:message for="company" />
-
-					<h:outputLabel for="recipient" value="Recipient"></h:outputLabel>
-					<h:inputText id="recipient"
-						value="#{invoicesPageData.newInvoice.recipient}">
-					</h:inputText>
-					<p:message for="recipient" />
-				</h:panelGrid>
-				<h:commandButton action="#{invoicesPageBean.addNew}" value="Add new"
-					update="grid"></h:commandButton>
-			</p:panel>
 
 
 		</h:form>
+
 
 	</ui:define>
 
-	<ui:define name="pavadinimas">
- 	 	Add new item
- 	 </ui:define>
+
 
 </ui:composition>

@@ -26,23 +26,28 @@ public class ItemImpl implements ItemRepository {
 	public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
 		this.entityManagerFactory = entityManagerFactory;
 	}
+	
+	public Item update(Item item) {
+		EntityManager em = getEntityManager();
+		try {
+			return em.merge(item);
+		} finally {
+			em.close();
+		}
+	
+	}
 
 	public void insertOrUpdate(Item item) {
 		EntityManager em = getEntityManager();
 		try {
 			em.getTransaction().begin();
-			boolean merged = false;
-			for(Item i : item.getInvoice().getItems()) {
-				if(!em.contains(i)) {
-					em.merge(i);
-					merged = true;
-				} else 
-					em.persist(i);
-			}
-			if(merged)
+			if(item.getInvoice().getItems().contains(item)){
 				em.merge(item);
-			else
+				
+			}
+			else { 
 				em.persist(item);
+			}
 			em.getTransaction().commit();
 		} finally {
 			em.close();

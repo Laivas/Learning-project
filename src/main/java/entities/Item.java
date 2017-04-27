@@ -21,17 +21,17 @@ public class Item implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private long id;
+	private Long id;
 	
 	@NotNull
 	@NotBlank
 	private String title;
 	
-	private int amount;
+	private Integer amount;
 	
 	private String weight;
 	
-	private double price;
+	private Double price;
 	
 	@JoinColumn(name = "invoice_id")
 	@ManyToOne(optional = true, cascade = { CascadeType.ALL})
@@ -43,44 +43,54 @@ public class Item implements Serializable {
 		return amount * price;
 		
 	}
-	
-	public long getId() {
+
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 	public String getTitle() {
 		return title;
 	}
 
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public int getAmount() {
+
+	public Integer getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+
+	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
+
 
 	public String getWeight() {
 		return weight;
 	}
 
+
 	public void setWeight(String weight) {
 		this.weight = weight;
 	}
 
-	public double getPrice() {
+
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
@@ -88,6 +98,7 @@ public class Item implements Serializable {
 	public Invoice getInvoice() {
 		return invoice;
 	}
+
 
 	public void setInvoice(Invoice invoice) {
 		this.invoice = invoice;

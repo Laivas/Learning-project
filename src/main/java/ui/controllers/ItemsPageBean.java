@@ -8,6 +8,8 @@ import entities.repositories.ItemRepository;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,12 +46,6 @@ public class ItemsPageBean {
 	public String addNew() {
 		
 		Invoice invoice = invoicesPageBean.getData().getCurrentInvoice();
-		log.info("Adding new item to invoice : {}", invoice);
-		log.info("New item info: {}", newItem);
-		if(invoice.getItems().contains(newItem)) {
-			itemRepo.insertOrUpdate(newItem);
-		}
-		else
 		newItem.setInvoice(invoice);
 		invoice.addItem(newItem);
 		invoiceRepo.save(invoice);
@@ -63,8 +59,13 @@ public class ItemsPageBean {
 		i.removeItem(item);
 		Long id = item.getId();
 		itemRepo.deleteById(id);
-
+		message("Item id. "+id+" deleted.");
 		
+	}
+	
+	public void message(String message) {
+		FacesMessage doneMessage = new FacesMessage(message);
+		FacesContext.getCurrentInstance().addMessage(null, doneMessage);
 	}
 
 	public InvoicesPageBean getInvoicesPageBean() {
@@ -108,9 +109,11 @@ public class ItemsPageBean {
 	}
 	
 	public List<Item> getItemList() {
+		
 		return invoicesPageBean.getData().getCurrentInvoice().getItems();
+		
 	}
-	
+
 	
 	
 }

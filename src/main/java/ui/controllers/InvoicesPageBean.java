@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
@@ -97,9 +99,11 @@ public class InvoicesPageBean {
 	
 	public String deleteSelected(Invoice invoice) {
 		log.info("Deleting invoice: "+invoice.getNumber());
+		Long nr = invoice.getNumber();
 			invoiceRepo.delete(invoice);
-		
+			message("Invoice nr. "+nr+" deleted.");
 		return NAV_LIST_INVOICES;
+		
 	}
 	
 	public String invoiceToUpdate(Invoice invoice) {
@@ -118,6 +122,11 @@ public class InvoicesPageBean {
 	public String showViewPage(Invoice invoice) {
 		data.currentInvoice = invoice;
 		return NAV_SHOW_VIEW;
+	}
+	
+	public void message(String message) {
+		FacesMessage doneMessage = new FacesMessage(message);
+		FacesContext.getCurrentInstance().addMessage(null, doneMessage);
 	}
 
 	public InvoicesPageData getData() {

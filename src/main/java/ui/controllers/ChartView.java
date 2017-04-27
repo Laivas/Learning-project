@@ -75,7 +75,6 @@ public class ChartView implements Serializable {
 		barModel = initBarModel();
 
 		barModel.setTitle("Bar Chart");
-		barModel.setLegendPosition("ne");
 
 		Axis xAxis = barModel.getAxis(AxisType.X);
 		xAxis.setLabel("Amount");

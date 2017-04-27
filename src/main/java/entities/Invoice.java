@@ -35,11 +35,11 @@ public class Invoice implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private long id;
+	private Long id;
 	
 	@NotNull
-	private long number;
-	@Temporal(TemporalType.TIMESTAMP)
+	private Long number;
+	@Temporal(TemporalType.DATE)
 	private Date date;
 	private String company;
 	private String recipient;
@@ -74,20 +74,20 @@ public class Invoice implements Serializable {
 		 }
 		 return price;
 	}
-	
-	public long getId() {
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public long getNumber() {
+	public Long getNumber() {
 		return number;
 	}
 
-	public void setNumber(long number) {
+	public void setNumber(Long number) {
 		this.number = number;
 	}
 

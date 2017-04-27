@@ -8,6 +8,7 @@
 
 
 		<h:form>
+
 			<p:messages id="messages" showDetail="false" autoUpdate="true"
 				closable="true" />
 
@@ -30,36 +31,44 @@
 				</p:column>
 
 				<p:column headerText="Unit Price">
-					<h:outputText value="#{item.price}" >
-					<f:convertNumber type="number" pattern="###,###.###€"/>
+					<h:outputText value="#{item.price}">
+						<f:convertNumber type="number" pattern="###,###.###€" />
 					</h:outputText>
 				</p:column>
 
 				<p:column headerText="Total price">
-					<h:outputText value="#{item.totalPrice}" >
-					<f:convertNumber type="number" pattern="###,###.###€"/>
+					<h:outputText value="#{item.totalPrice}">
+						<f:convertNumber type="number" pattern="###,###.###€" />
 					</h:outputText>
 				</p:column>
 
 				<p:column>
-					<h:commandButton value="Update"
-						action="#{itemsPageB.updateItem(item)}" />
-					<h:commandButton value="Delete"
-						action="#{itemsPageB.deleteSelected(item)}" />
+					<p:commandButton value="Delete"
+						actionListener="#{itemsPageB.deleteSelected(item)}" update="@form" >
+						<p:confirm header="Confirmation" message="Are you sure?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
 				</p:column>
 
 
 
 			</p:dataTable>
 
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Yes" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
+
+
 		</h:form>
 
- 
+
 
 
 		<h:form>
-			<p:messages id="messages" showDetail="true" autoUpdate="true"
-				closable="true" />
 			<p:panel id="basic" header="Item details" style="margin-bottom:20px">
 				<h:panelGrid id="grid" columns="3" cellpadding="5">
 					<h:outputLabel for="itemTitle" value="Item title"></h:outputLabel>
@@ -84,7 +93,7 @@
 					<p:message for="price" />
 				</h:panelGrid>
 
-				<h:commandButton action="#{itemsPageB.addNew}" value="Add new"></h:commandButton>
+				<p:commandButton action="#{itemsPageB.addNew}" value="Add new" ajax="false"></p:commandButton>
 			</p:panel>
 		</h:form>
 
